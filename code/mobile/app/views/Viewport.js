@@ -8,7 +8,8 @@ ot.views.Viewport = Ext.extend(Ext.Panel, {
         //put instances of cards into ot.views namespace
         Ext.apply(ot.views, {
             circlesList: new ot.views.CirclesList(),
-            circleDetail: new ot.views.CircleDetail()
+            circleDetail: new ot.views.CircleDetail(),
+            circleCreate: new ot.views.CircleCreate()
             //contactsList: new ot.views.ContactsList(),
             //contactDetail: new ot.views.ContactDetail(),
             //contactForm: new ot.views.ContactForm()
