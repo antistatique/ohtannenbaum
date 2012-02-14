@@ -1,10 +1,19 @@
 ot.controllers.circles = new Ext.Controller({
     index: function(options) {
-        options = options || {};
+      options = options || {};
+      if(Ext.getStore('ot.stores.Circle').getCount() > 0){
         ot.views.viewport.setActiveItem(
-            ot.views.circlesList,
-            options.animation
+          ot.views.circlesList,
+          options.animation
         );
+      }else{
+        ot.views.viewport.setActiveItem(
+          ot.views.welcomeScreen,
+          options.animation
+        );
+      }
+      
+      
     },
 
     show: function(options) {
@@ -26,6 +35,10 @@ ot.controllers.circles = new Ext.Controller({
     },
     
     insert: function(options){
+        if(Ext.getStore('ot.stores.Circle').findRecord('title',options.title, 0, false, true, true) !== null){
+          ot.pushNotification('Un cercle portant le même nom existe déja');
+          return false;
+        }
         var store = Ext.getStore('ot.stores.Circle'),
             newRecord;
                 
@@ -44,6 +57,9 @@ ot.controllers.circles = new Ext.Controller({
 
     add: function (options) {
         var addView = ot.views.circleCreate;
+
+        addView.reset();
+
         ot.views.viewport.setActiveItem(
             addView,
             options.animation
