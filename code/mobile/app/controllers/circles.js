@@ -6,13 +6,12 @@ ot.controllers.circles = new Ext.Controller({
             options.animation
         );
     },
-    
+
     show: function(options) {
         var store = Ext.getStore('ot.stores.Circle'),
             detailView = ot.views.circleDetail,
             id = parseInt(options.id),
             circle = store.getById(id);
-        
         console.log(detailView)
         
         if (circle) {
@@ -26,13 +25,13 @@ ot.controllers.circles = new Ext.Controller({
         }
     },
     
-    add: function (options) {
+    insert: function(options){
         var store = Ext.getStore('ot.stores.Circle'),
             newRecord;
                 
-        // here add a random item, normally: display a form
+        //Add the circle width title receiving in options
         newRecord = {
-            title: "Random title (" + parseInt(Math.random()*100 + 1) + ")",
+            title: options.title,
             created_at: new Date()
         };
         
@@ -41,6 +40,14 @@ ot.controllers.circles = new Ext.Controller({
         
         // return to list
         this.index();
+    },
+
+    add: function (options) {
+        var addView = ot.views.circleCreate;
+        ot.views.viewport.setActiveItem(
+            addView,
+            options.animation
+        );
     },
     
     edit: function (options) {
