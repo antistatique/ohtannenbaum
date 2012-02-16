@@ -10,8 +10,8 @@ ot.views.Viewport = Ext.extend(Ext.Panel, {
             circlesList: new ot.views.CirclesList(),
             circleDetail: new ot.views.CircleDetail(),
             circleCreate: new ot.views.CircleCreate(),
-            welcomeScreen: new ot.views.WelcomeScreen()
-            //contactsList: new ot.views.ContactsList(),
+            welcomeScreen: new ot.views.WelcomeScreen(),
+            contactsList: new ot.views.ContactsList()
             //contactDetail: new ot.views.ContactDetail(),
             //contactForm: new ot.views.ContactForm()
         });
