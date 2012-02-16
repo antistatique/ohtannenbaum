@@ -19,7 +19,12 @@
 	<key>OpenAllWhitelistURLsInWebView</key>
 	<false/>
 	<key>ExternalHosts</key>
-	<array/>
+	<array>
+		<string>localhost</string>
+		<string>192.168.1.53</string>
+		<string>ohtannenbaum.ch</string>
+		<string>api.ohtannenbaum.ch</string>
+	</array>
 	<key>Plugins</key>
 	<dict>
 		<key>com.phonegap.accelerometer</key>
