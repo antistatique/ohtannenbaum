@@ -71,8 +71,6 @@
 		7675141814ED9551001BB786 /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MainViewController.m; path = Classes/MainViewController.m; sourceTree = "<group>"; };
 		7675141A14ED9551001BB786 /* MainViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MainViewController.xib; path = Classes/MainViewController.xib; sourceTree = "<group>"; };
 		7675141D14ED9551001BB786 /* README */ = {isa = PBXFileReference; lastKnownFileType = text; name = README; path = Plugins/README; sourceTree = "<group>"; };
-		7675142314ED95AA001BB786 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = /Users/gde/Documents/Antistatique/projets/ohtannenbaum/code/ios/ohtannenbaum/ohtannenbaum/fr.lproj/InfoPlist.strings; sourceTree = "<absolute>"; };
-		7675142414ED95AA001BB786 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = /Users/gde/Documents/Antistatique/projets/ohtannenbaum/code/ios/ohtannenbaum/ohtannenbaum/fr.lproj/Localizable.strings; sourceTree = "<absolute>"; };
 		76F6486A14ED967E0054D236 /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; path = www; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -347,7 +345,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				767513F314ED9550001BB786 /* en */,
-				7675142314ED95AA001BB786 /* fr */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -356,7 +353,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				767513FD14ED9551001BB786 /* en */,
-				7675142414ED95AA001BB786 /* fr */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
