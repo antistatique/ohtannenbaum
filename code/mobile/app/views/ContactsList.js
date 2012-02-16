@@ -11,6 +11,9 @@ ot.views.ContactsList = Ext.extend(Ext.Panel, {
       grouped: true,
       indexBar: true,
       onItemDisclosure: function (record) {
+        //Réinitialisation de this.actions pour mise a jour des items à chaque affichage
+        this.actions = null;
+
         console.log('record');
         console.log(record);
         var ActionSheetItems = new Array();
