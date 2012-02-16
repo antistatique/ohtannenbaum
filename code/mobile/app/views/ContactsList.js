@@ -10,13 +10,10 @@ ot.views.ContactsList = Ext.extend(Ext.Panel, {
       itemTpl: '{givenName} {familyName}',
       grouped: true,
       indexBar: true,
-      onItemDisclosure: function (record) {
-        //Réinitialisation de this.actions pour mise a jour des items à chaque affichage
+      onItemDisclosure: function(record) {
         this.actions = null;
-
-        console.log('record');
-        console.log(record);
         var ActionSheetItems = new Array();
+
         ActionSheetItems.push({
           text : 'Cancel',
           scope : this,
@@ -30,7 +27,6 @@ ot.views.ContactsList = Ext.extend(Ext.Panel, {
             text: 'Utiliser ' + record.data.emails[0].value,
             scope: this,
             handler: function(record){
-              console.log('ajouter par email');
             }
           });
         }
@@ -40,7 +36,6 @@ ot.views.ContactsList = Ext.extend(Ext.Panel, {
             text: 'Utiliser ' + record.data.phoneNumbers[0].value,
             scope: this,
             handler: function(record){
-              console.log('ajouter par no de tel');
             }
           });
         }
@@ -50,14 +45,12 @@ ot.views.ContactsList = Ext.extend(Ext.Panel, {
             items: ActionSheetItems
           });
         }
+
         this.actions.show();
       }
     }],
     initComponent: function() {
         ot.stores.contacts.load();
         ot.views.ContactsList.superclass.initComponent.apply(this, arguments);
-    },
-    taptaptap: function(){
-      console.log('tap');
     }
 });
