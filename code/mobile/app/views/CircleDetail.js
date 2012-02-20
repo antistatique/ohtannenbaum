@@ -3,16 +3,34 @@ ot.views.CircleDetail = Ext.extend(Ext.Panel, {
   scroll: 'vertical',
   form: null,
   initComponent: function() {
+    var me = this;
     console.log('Ok, my detail circle informations can be now displayed');
 
     var morebutton, titlebar, bottomDock, backButton;
+
+    var actionSheet = new Ext.ActionSheet({
+      items: [{
+        text : 'Ajouter via le carnet d\'adresse',
+        scope: this,
+        handler : function(){
+          me.onAddViaAddressBookAction();
+          actionSheet.hide();
+        }
+      },{
+        text : 'Cancel',
+        scope : this,
+        handler : function(){
+          actionSheet.hide();
+        }
+      }]
+    });
 
     moreButton = {
       itemId: 'moreButton',
       iconCls: 'add',
       iconMask: true,
       ui: 'plain',
-      handler: this.displayBottonDock,
+      handler: function(){actionSheet.show()},
       scope: this
     };
 
@@ -31,47 +49,28 @@ ot.views.CircleDetail = Ext.extend(Ext.Panel, {
       items: [backButton, {xtype: 'spacer'}, moreButton]
     };
 
-
-    /*Bottomdock items*/
-    var bottomDocksButtons = [
-      new Ext.Button({
-        applyTo:'addViaAddressBookButton',
-        text: 'Ajouter vie le carnet d\'adresse',
-        handler:this.onAddViaAddressBookAction,
-        scope: this
-      }),
-      new Ext.Button({
-        applyTo:'addManually',
-        text: 'Ajouter manuellement',
-        handler:this.onAddViaAddressBookAction,
-        scope: this
-      }),
-      new Ext.Button({
-        applyTo:'cancelButton',
-        text: 'Annuler',
-        handler:this.onAddViaAddressBookAction,
-        scope: this
-      })
-    ];
-
-    bottomDock = new Ext.Panel({
-      xtype : 'panel',
-      title : 'Child Panel 1',
-      frame : true,
-      html : 'Dock du bas',
-      style : {
-        'margin' : '0 auto',
-        'background-color' : '#c00'
-      },
-      items: bottomDocksButtons
-    });
+    var listMember = {
+      xtype: 'list',
+      store: Ext.StoreMgr.get('ot.stores.Member'),
+      itemTpl: '{name}',
+      listeners: {
+        itemtap: function (list, index, item, e) {
+          var record = list.getStore().getAt(index);
+          Ext.dispatch({
+            controller: ot.controllers.circles,
+            action: 'show',
+            id: record.getId()
+          });
+        }
+      }
+    };
 
     Ext.apply(this, {
       scroll: 'vertical',
       dockedItems: [ titlebar, moreButton ],
-      items: [bottomDock]
+      items: [ listMember, actionSheet ]
     });
-    
+
     ot.views.CircleDetail.superclass.initComponent.apply(this, arguments);
   },
   updateWithRecord: function(record) {
