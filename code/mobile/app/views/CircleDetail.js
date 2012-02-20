@@ -17,6 +17,13 @@ ot.views.CircleDetail = Ext.extend(Ext.Panel, {
           actionSheet.hide();
         }
       },{
+        text : 'Ajouter manuellement',
+        scope: this,
+        handler : function(){
+          me.onAddManuallyAction();
+          actionSheet.hide();
+        }
+      },{
         text : 'Cancel',
         scope : this,
         handler : function(){
@@ -93,10 +100,16 @@ ot.views.CircleDetail = Ext.extend(Ext.Panel, {
     });
   },
   onAddViaAddressBookAction: function(){
-    console.log('Call contacts controller');
     Ext.dispatch({
       controller: ot.controllers.contacts,
       action: 'index',
+      animation: { type:'slide', direction:'right' }
+    });
+  },
+  onAddManuallyAction: function(){
+    Ext.dispatch({
+      controller: ot.controllers.members,
+      action: 'manuallyAdd',
       animation: { type:'slide', direction:'right' }
     });
   }
