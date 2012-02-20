@@ -19,7 +19,7 @@ ot.controllers.circles = new Ext.Controller({
     show: function(options) {
         var store = Ext.getStore('ot.stores.Circle'),
             detailView = ot.views.circleDetail,
-            id = parseInt(options.id),
+            id = parseInt(options.id) || ot.currentCircleId,
             circle = store.getById(id);
         if (circle) {
             ot.currentCircleId = id;
