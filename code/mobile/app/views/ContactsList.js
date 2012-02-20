@@ -14,6 +14,8 @@ ot.views.ContactsList = Ext.extend(Ext.Panel, {
         this.actions = null;
         var ActionSheetItems = new Array();
 
+        var contactRecord = record;
+
         ActionSheetItems.push({
           text : 'Cancel',
           scope : this,
@@ -27,7 +29,15 @@ ot.views.ContactsList = Ext.extend(Ext.Panel, {
             text: 'Utiliser ' + record.data.emails[0].value,
             scope: this,
             handler: function(record){
+              this.actions.hide();
+              Ext.dispatch({
+                controller: ot.controllers.contacts,
+                action: 'add',
+                record: contactRecord,
+                selected: 'email'
+              });
             }
+
           });
         }
 
@@ -36,6 +46,13 @@ ot.views.ContactsList = Ext.extend(Ext.Panel, {
             text: 'Utiliser ' + record.data.phoneNumbers[0].value,
             scope: this,
             handler: function(record){
+              this.actions.hide();
+              Ext.dispatch({
+                controller: ot.controllers.contacts,
+                action: 'add',
+                record: contactRecord,
+                selected: 'phone'
+              });
             }
           });
         }
