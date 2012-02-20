@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         
         <title>Oh tannenbaum</title>
-        <script type="text/javascript" src="lib/touch/sencha-touch.js"></script>
+        <script type="text/javascript" src="lib/touch/sencha-touch-debug.js"></script>
         <script type="text/javascript" src="http://192.168.1.53:8080/target/target-script-min.js#phonegap"></script>
         <!--<script src="http://192.168.1.53:8001/ibug.js"></script>-->
 
@@ -14,23 +14,26 @@
         <script type="text/javascript" src="lib/phonegap-1.4.1.js"></script>
         <script type="text/javascript" src="app/routes.js"></script>
         <script type="text/javascript" src="app/app.js"></script>
+        <script type="text/javascript" src="app/models/Circle.js"></script>
+        <script type="text/javascript" src="app/models/Member.js"></script>
+        <script type="text/javascript" src="app/models/contacts.js"></script>
         <script type="text/javascript" src="app/controllers/circles.js"></script>
         <script type="text/javascript" src="app/controllers/contacts.js"></script>
-        <script type="text/javascript" src="app/models/Circle.js"></script>
-        <script type="text/javascript" src="app/models/contacts.js"></script>
+        <script type="text/javascript" src="app/controllers/members.js"></script>
         <script type="text/javascript" src="app/views/Viewport.js"></script>
         <script type="text/javascript" src="app/views/WelcomeScreen.js"></script>
         <script type="text/javascript" src="app/views/CirclesList.js"></script>
         <script type="text/javascript" src="app/views/CircleDetail.js"></script>
         <script type="text/javascript" src="app/views/CircleCreate.js"></script>
         <script type="text/javascript" src="app/views/ContactsList.js"></script>
+        <script type="text/javascript" src="app/views/ManuallyAddMember.js"></script>
         
         <script type="text/javascript">
             document.addEventListener("deviceready", function (e) {
-	            alert('Device and PhoneGap is ready');
+	            //alert('Device and PhoneGap is ready');
 	            ot.mainLaunch(e);
 	        }, false);
-                window.localStorage.clear();
+                localStorage.clear();
         </script>
         
         <!-- Need a javascript debugger ? Download Weinre http://phonegap.github.com/weinre/ and comment out the following line: -->
