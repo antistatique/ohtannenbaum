@@ -8,6 +8,7 @@ Ext.regApplication({
   name: 'ot', // this will create a global namespace ot (= Oh Tannenbaum)
   defaultUrl: 'circles/index',
   useHistory: true,
+  currentCircleId: null,
 
   pushNotification: function(message){
     if(navigator.notification){
