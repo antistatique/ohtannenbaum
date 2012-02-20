@@ -40,7 +40,7 @@ ot.controllers.contacts = new Ext.Controller({
         circle = store.getById(circle_id);
 
     if (circle) {
-      detailView.updateWithRecord(circle);
+      //detailView.updateWithRecord(circle);
       ot.views.viewport.setActiveItem(
           detailView,
           options.animation
