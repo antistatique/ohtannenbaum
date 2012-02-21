@@ -32,29 +32,25 @@ ot.views.ManuallyAddMember = Ext.extend(Ext.Panel, {
             tap: function () {
               console.log('Sauvegarde du contact crée manuellement');
               console.log(that.form);
-              var firstname = that.form.getValues().first;
-              var lastname = that.form.getValues().last;
-              var email = that.form.getValues().email;
-              var phone = that.form.getValues().phone;
+              var name = that.form.getValues().name;
+              var emailorphone = that.form.getValues().emailorphone;
 
-              if(!firstname){
-                ot.pushNotification('Le champ prénom est obligatoire');
+              if(!name){
+                ot.pushNotification('Le champ "nom" est obligatoire');
                 return false;
               }
 
-              if(!lastname){
-                ot.pushNotification('Le champ nom est obligatoire');
+              if(!emailorphone){
+                ot.pushNotification('Le champ "Email ou mobile" est obligatoire');
                 return false;
               }
 
-              var fullname = firstname + ' ' + lastname;
               //If new circle title is unique
               Ext.dispatch({
                 controller: ot.controllers.members,
                 action: 'insertManually',
-                name: fullname,
-                email: email,
-                phone: phone
+                name: name,
+                emailorphone: emailorphone
               });
             }
           }
@@ -65,29 +61,18 @@ ot.views.ManuallyAddMember = Ext.extend(Ext.Panel, {
     this.form = new Ext.form.FormPanel({
       items: [
           {
-            id: 'first',
+            id: 'name',
             xtype: 'textfield',
-            name : 'first',
+            name : 'name',
             label: 'First name'
           },
           {
-            id: 'last',
+            id: 'emailorphone',
             xtype: 'textfield',
-            name : 'last',
-            label: 'Last name'
-          },
-          {
-            id: 'email',
-            xtype: 'textfield',
-            name : 'email',
-            label: 'Email'
-          },
-          {
-            id: 'phone',
-            xtype: 'textfield',
-            name : 'phone',
-            label: 'Phonenumber'
-          },
+            fieldLabel: 'Entrez l\'email ou le numéro de téléphone mobile',   // = label de description du champ
+            name : 'emailorphone',
+            label: 'Email ou mobile'
+          }
       ]
     });
     this.items = [this.form];
