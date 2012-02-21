@@ -55,11 +55,40 @@ ot.views.CircleDetail = Ext.extend(Ext.Panel, {
       title: 'Oh Tannenbaum',
       items: [backButton, {xtype: 'spacer'}, moreButton]
     };
-
     var listMember = {
+      id: 'circleMembersList',
       xtype: 'list',
       store: Ext.StoreMgr.get('ot.stores.Member'),
-      itemTpl: '{name}',
+      //itemTpl: '{name}',
+      itemTpl: 
+          '<div style="float:left"><span style="line-height:20px;">{name}</span>' +
+            '<p style="font-size:7pt; margin:0; padding:0">{email}{phone}</p>' +
+          '</div>' + 
+            '<img src="ressources/images/trash-can.png" style="vertical-align: middle; float:right" onclick="Ext.getCmp(\'circleMembersList\').deleteMember({[xindex-1]})"/>' +
+          '</span>'
+      ,
+      deleteMember: function (index) {
+          console.log(index);
+          var thatList = this;
+          Ext.Msg.confirm('Confirmation', 'Êtes-vous sûr de vouloir supprimer ce membre?', 
+            function(btn){
+              if(btn == 'yes'){
+                console.log('Choose yes');
+                var store = thatList.getStore();
+                var record = store.getAt(index);
+                store.remove(record);
+                Ext.dispatch({
+                  controller: ot.controllers.circles,
+                  action: 'show'
+                });
+              }
+            }
+          );
+          // var store = this.getStore();
+          // var record = store.getAt(index);
+          // console.log('removing ' + record.data.myName);
+          // store.remove(record);
+      },
       listeners: {
         itemtap: function (list, index, item, e) {
           var record = list.getStore().getAt(index);
