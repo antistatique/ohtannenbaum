@@ -12,12 +12,8 @@ ot.controllers.contacts = new Ext.Controller({
   },
   add: function(options){
     options = options || {};
-    console.log(options);
     //Récupération du circle id
     var circle_id = ot.currentCircleId;
-    //Récupération du cercle stocké
-    //var myCircle = new ot.models.Circle({id: circle_id});
-
     var emailAddress = '';
     if(options.record.data.emails){
       emailAddress = options.record.data.emails[0].value;
@@ -25,6 +21,12 @@ ot.controllers.contacts = new Ext.Controller({
     var phoneNumber = '';
     if(options.record.data.phoneNumbers){
       phoneNumber = options.record.data.phoneNumbers[0].value;
+    }
+
+    if(options.selected == 'email'){
+      phoneNumber = '';
+    }else{
+      emailAddress = '';
     }
 
     var circleModel = Ext.ModelMgr.create({id: circle_id}, 'ot.models.Circle');
@@ -36,11 +38,11 @@ ot.controllers.contacts = new Ext.Controller({
     store.add(myUser);
     store.sync();
 
+    store = Ext.getStore('ot.stores.Circle');
+
     var detailView = ot.views.circleDetail,
         circle = store.getById(circle_id);
-
     if (circle) {
-      //detailView.updateWithRecord(circle);
       ot.views.viewport.setActiveItem(
           detailView,
           options.animation
