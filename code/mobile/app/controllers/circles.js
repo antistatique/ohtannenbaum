@@ -75,7 +75,15 @@ ot.controllers.circles = new Ext.Controller({
         );
     },
     
-    edit: function (options) {
-        // ...
+    drawOwnerEdit: function(options){
+      var drawOwner = ot.views.drawOwner;
+      ot.views.viewport.setActiveItem(
+          drawOwner,
+          options.animation
+      );
+    },
+    doDraw: function(){
+      console.log('On effectue le tirage au sort');
     }
+
 });
