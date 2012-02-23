@@ -107,7 +107,13 @@ ot.views.CircleDetail = Ext.extend(Ext.Panel, {
     this.drawButton = new Ext.Button({
       applyTo:'button-div',
       text: 'Tirage au sort',
-      handler: function(){console.log('Ok ici on clic sur le button')},
+      handler: function(){
+        Ext.dispatch({
+          controller: ot.controllers.circles,
+          action: 'drawOwnerEdit',
+          animation: { type:'slide', direction:'right' }
+        });
+      },
       scope: this
     });
 
@@ -151,6 +157,8 @@ ot.views.CircleDetail = Ext.extend(Ext.Panel, {
       console.log('Plus ou egal à un membre');
       this.drawButton.enable();
       //this.items.drawButton.show();
+    }else{
+      this.drawButton.disable();
     }
   },
   displayBottonDock: function(){

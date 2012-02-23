@@ -75,7 +75,30 @@ ot.controllers.circles = new Ext.Controller({
         );
     },
     
-    edit: function (options) {
-        // ...
+    drawOwnerEdit: function(options){
+      var drawOwner = ot.views.drawOwner;
+      ot.views.viewport.setActiveItem(
+          drawOwner,
+          options.animation
+      );
+    },
+    doDraw: function(){
+      console.log('On effectue le tirage au sort');
+
+      var memberStore = Ext.StoreMgr.get('ot.stores.Member');
+      memberStore.clearFilter();
+
+      memberStore.filter({
+        property: 'ot.models.circle_id',
+        value: ot.currentCircleId,
+        exactMatch: true
+      });
+
+      var membersArray = memberStore.data.items;
+
+      membersArray.sort(function(){return Math.round(Math.random())-0.5});
+
+      console.log(membersArray);
+
     }
 });
