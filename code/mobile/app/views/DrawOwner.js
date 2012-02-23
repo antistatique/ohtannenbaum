@@ -30,21 +30,26 @@ ot.views.DrawOwner = Ext.extend(Ext.Panel, {
           ui: 'action',
           listeners: {
             tap: function () {
-              var name = that.form.getValues().ownerName;
-              var email = that.form.getValues().ownerEmail;
-              var phone = that.form.getValues().ownerPhone;
+              Ext.Msg.confirm('Tirage au sort', 'En lançant le tirage au sort, tous les participants reçoivent un message. Cette action est irréversible. Voulez-vous continuer?', 
+                function(btn){
+                  if(btn == 'yes'){
+                    var name = that.form.getValues().ownerName;
+                    var email = that.form.getValues().ownerEmail;
+                    var phone = that.form.getValues().ownerPhone;
 
-              if(!name || !email || !phone){
-                ot.pushNotification('Tous les champs sont obligatoires.');
-                return false;
-              }
-
-              console.log('tous les champs organisateur sont remplis');
-              //If new circle title is unique
-              Ext.dispatch({
-                controller: ot.controllers.circles,
-                action: 'doDraw'
-              });
+                    if(!name || !email || !phone){
+                      ot.pushNotification('Tous les champs sont obligatoires.');
+                      return false;
+                    }
+                    
+                    //If new circle title is unique
+                    Ext.dispatch({
+                      controller: ot.controllers.circles,
+                      action: 'doDraw'
+                    });
+                  }
+                }
+              );
             }
           }
         }
