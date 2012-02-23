@@ -10,10 +10,12 @@ ot.views.ContactsList = Ext.extend(Ext.Panel, {
       itemTpl: '{givenName} {familyName}',
       grouped: true,
       indexBar: true,
-      onItemDisclosure: function (record) {
-        console.log('record');
-        console.log(record);
+      onItemDisclosure: function(record) {
+        this.actions = null;
         var ActionSheetItems = new Array();
+
+        var contactRecord = record;
+
         ActionSheetItems.push({
           text : 'Cancel',
           scope : this,
@@ -27,8 +29,15 @@ ot.views.ContactsList = Ext.extend(Ext.Panel, {
             text: 'Utiliser ' + record.data.emails[0].value,
             scope: this,
             handler: function(record){
-              console.log('ajouter par email');
+              this.actions.hide();
+              Ext.dispatch({
+                controller: ot.controllers.contacts,
+                action: 'add',
+                record: contactRecord,
+                selected: 'email'
+              });
             }
+
           });
         }
 
@@ -37,7 +46,13 @@ ot.views.ContactsList = Ext.extend(Ext.Panel, {
             text: 'Utiliser ' + record.data.phoneNumbers[0].value,
             scope: this,
             handler: function(record){
-              console.log('ajouter par no de tel');
+              this.actions.hide();
+              Ext.dispatch({
+                controller: ot.controllers.contacts,
+                action: 'add',
+                record: contactRecord,
+                selected: 'phone'
+              });
             }
           });
         }
@@ -47,14 +62,12 @@ ot.views.ContactsList = Ext.extend(Ext.Panel, {
             items: ActionSheetItems
           });
         }
+
         this.actions.show();
       }
     }],
     initComponent: function() {
         ot.stores.contacts.load();
         ot.views.ContactsList.superclass.initComponent.apply(this, arguments);
-    },
-    taptaptap: function(){
-      console.log('tap');
     }
 });

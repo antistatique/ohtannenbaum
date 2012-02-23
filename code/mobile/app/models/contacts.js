@@ -80,6 +80,9 @@ ot.stores.contacts = new Ext.data.Store({
     model: "ot.models.Contact",
     sorters: 'familyName',
     getGroupString : function(record) {
+        if('' == record.get('familyName')) {
+            return '-';
+        }
         return record.get('familyName')[0];
     }
 });

@@ -19,14 +19,22 @@ ot.controllers.circles = new Ext.Controller({
     show: function(options) {
         var store = Ext.getStore('ot.stores.Circle'),
             detailView = ot.views.circleDetail,
-            id = parseInt(options.id),
+            id = parseInt(options.id) || ot.currentCircleId,
             circle = store.getById(id);
-        console.log(detailView)
-        
         if (circle) {
-            // ...
-            console.log("circle id %i", id);
+            ot.currentCircleId = id;
+
+            var memberStore = Ext.StoreMgr.get('ot.stores.Member');
+            memberStore.clearFilter();
+
+            memberStore.filter({
+              property: 'ot.models.circle_id',
+              value: id,
+              exactMatch: true
+            });
+
             detailView.updateWithRecord(circle);
+
             ot.views.viewport.setActiveItem(
                 detailView,
                 options.animation
@@ -35,19 +43,20 @@ ot.controllers.circles = new Ext.Controller({
     },
     
     insert: function(options){
+        
         if(Ext.getStore('ot.stores.Circle').findRecord('title',options.title, 0, false, true, true) !== null){
           ot.pushNotification('Un cercle portant le même nom existe déja');
           return false;
         }
         var store = Ext.getStore('ot.stores.Circle'),
-            newRecord;
-                
+            newRecord;       
+        
         //Add the circle width title receiving in options
         newRecord = {
             title: options.title,
             created_at: new Date()
         };
-        
+
         store.add(newRecord);
         store.sync();
         
