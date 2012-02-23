@@ -1,15 +1,14 @@
 ot.controllers.circles = new Ext.Controller({
     index: function(options) {
+      console.log('start circle.index');
       options = options || {};
       if(Ext.getStore('ot.stores.Circle').getCount() > 0){
         ot.views.viewport.setActiveItem(
-          ot.views.circlesList,
-          options.animation
+          ot.views.circlesList
         );
       }else{
         ot.views.viewport.setActiveItem(
-          ot.views.welcomeScreen,
-          options.animation
+          ot.views.welcomeScreen
         );
       }
       
@@ -17,6 +16,8 @@ ot.controllers.circles = new Ext.Controller({
     },
 
     show: function(options) {
+        console.log('start circle.show');
+        options = options || {};
         var store = Ext.getStore('ot.stores.Circle'),
             detailView = ot.views.circleDetail,
             id = parseInt(options.id) || ot.currentCircleId,
@@ -36,14 +37,14 @@ ot.controllers.circles = new Ext.Controller({
             detailView.updateWithRecord(circle);
 
             ot.views.viewport.setActiveItem(
-                detailView,
-                options.animation
+                detailView
             );
         }
     },
     
     insert: function(options){
-        
+        console.log('start circle.insert');
+        options = options || {};
         if(Ext.getStore('ot.stores.Circle').findRecord('title',options.title, 0, false, true, true) !== null){
           ot.pushNotification('Un cercle portant le même nom existe déja');
           return false;
@@ -65,24 +66,27 @@ ot.controllers.circles = new Ext.Controller({
     },
 
     add: function (options) {
+        console.log('start circle.add');
+        options = options || {};
         var addView = ot.views.circleCreate;
 
         addView.reset();
 
         ot.views.viewport.setActiveItem(
-            addView,
-            options.animation
+            addView
         );
     },
     
     drawOwnerEdit: function(options){
+      options = options || {};
+      
       var drawOwner = ot.views.drawOwner;
       ot.views.viewport.setActiveItem(
-          drawOwner,
-          options.animation
+          drawOwner
       );
     },
     doDraw: function(){
+      options = options || {};
       console.log('On effectue le tirage au sort');
 
       var memberStore = Ext.StoreMgr.get('ot.stores.Member');
