@@ -8,18 +8,31 @@ ot.views.Viewport = Ext.extend(Ext.Panel, {
         //put instances of cards into ot.views namespace
         Ext.apply(ot.views, {
             circlesList: new ot.views.CirclesList(),
-            circleDetail: new ot.views.CircleDetail()
-            //contactsList: new ot.views.ContactsList(),
+            circleDetail: new ot.views.CircleDetail(),
+            manuallyAddMember: new ot.views.ManuallyAddMember(),
+            circleCreate: new ot.views.CircleCreate(),
+            welcomeScreen: new ot.views.WelcomeScreen(),
+            contactsList: new ot.views.ContactsList()
+            
             //contactDetail: new ot.views.ContactDetail(),
             //contactForm: new ot.views.ContactForm()
         });
         
         //put instances of cards into viewport
-        Ext.apply(this, {
+        if(Ext.getStore('ot.stores.Circle').getCount() > 0){
+          Ext.apply(this, {
             items: [
                 ot.views.circlesList
             ]
-        });
+          });
+        }else{
+          Ext.apply(this, {
+            items: [
+                ot.views.welcomeScreen
+            ]
+          });
+        }
+        
         
         ot.views.Viewport.superclass.initComponent.apply(this, arguments);
     }
