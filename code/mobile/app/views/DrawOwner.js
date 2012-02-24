@@ -42,10 +42,12 @@ ot.views.DrawOwner = Ext.extend(Ext.Panel, {
                       return false;
                     }
                     
-                    //If new circle title is unique
                     Ext.dispatch({
                       controller: ot.controllers.circles,
-                      action: 'doDraw'
+                      action: 'doDraw',
+                      ownerName = name,
+                      ownerEmail = email,
+                      ownerPhone = phone
                     });
                   }
                 }
