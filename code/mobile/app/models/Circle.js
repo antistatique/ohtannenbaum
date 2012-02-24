@@ -3,7 +3,7 @@ ot.models.Circle = Ext.regModel('ot.models.Circle', {
         { name: 'id', type: 'int' },
         { name: 'title', type: 'string' },
         { name: 'created_at', type: 'date', dateFormat: 'c' },
-        { name: 'drawDate', type: 'date'}
+        { name: 'drawDate', type: 'date', dateFormat: 'c'}
     ],
     
     associations: [
