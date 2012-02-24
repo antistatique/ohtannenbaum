@@ -45,9 +45,9 @@ ot.views.DrawOwner = Ext.extend(Ext.Panel, {
                     Ext.dispatch({
                       controller: ot.controllers.circles,
                       action: 'doDraw',
-                      ownerName = name,
-                      ownerEmail = email,
-                      ownerPhone = phone
+                      ownerName: name,
+                      ownerEmail: email,
+                      ownerPhone: phone
                     });
                   }
                 }
