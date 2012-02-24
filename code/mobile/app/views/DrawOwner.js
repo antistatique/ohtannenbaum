@@ -25,7 +25,7 @@ ot.views.DrawOwner = Ext.extend(Ext.Panel, {
         },
         { xtype: 'spacer' },
         {
-          id: 'saveManually',
+          id: 'drawLaunch',
           text: 'Go',
           ui: 'action',
           listeners: {
@@ -87,7 +87,7 @@ ot.views.DrawOwner = Ext.extend(Ext.Panel, {
 
     this.items = [textPanel, this.form];
 
-    ot.views.ManuallyAddMember.superclass.initComponent.apply(this, arguments);
+    ot.views.DrawOwner.superclass.initComponent.apply(this, arguments);
   },
   reset: function() {
     this.form.reset();
