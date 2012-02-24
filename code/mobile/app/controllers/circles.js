@@ -98,7 +98,41 @@ ot.controllers.circles = new Ext.Controller({
 
       membersArray.sort(function(){return Math.round(Math.random())-0.5});
 
-      console.log(membersArray);
+      memberStore.clearFilter();
 
+      for(var i = 0; i < membersArray.length; i++){
+        //Récupération de l'angel
+        if(i == 0){
+          var angel = membersArray[membersArray.length - 1];
+        }else{
+          var angel = membersArray[i - 1];
+        }
+        //Récupération de l'id de l'angel
+        angelId = angel.get('id');
+        var angelIndex = memberStore.find('id', angelId);
+        var luckyIndex = memberStore.find('id', membersArray[i].get('id'));
+
+        var angelRecord = memberStore.getAt(angelIndex);
+        var luckyRecord = memberStore.getAt(luckyIndex);
+
+        angelRecord.set('angelOf', membersArray[i].get('id'));
+        luckyRecord.set('luckyOf', angelId);
+
+        /**
+         * Readonly flag - true if this Record has been modified.
+         * @type Boolean
+        */
+        angelRecord.dirty = luckyRecord.dirty = true;
+
+        memberStore.sync();
+      }
+
+
+      var circleStore = Ext.StoreMgr.get('ot.stores.Circle');
+      var circleIndex = circleStore.find('id', ot.currentCircleId);
+      var circleRecord = circleStore.getAt(circleIndex);
+      circleRecord.set('drawDate', new Date());
+      circleRecord.dirty = true;
+      circleStore.sync();
     }
 });
