@@ -82,7 +82,24 @@ ot.controllers.circles = new Ext.Controller({
           options.animation
       );
     },
-    doDraw: function(){
+    doDraw: function(options){
+
+      options = options || {}
+
+      var store = Ext.getStore('ot.stores.Owner'),
+            newRecord;       
+        
+      //Add the owner of the draw
+      newRecord = {
+          name: options.ownerName,
+          email: options.ownerEmail,
+          phone: options.ownerPhone,
+          circle_id: ot.currentCircleId
+      };
+
+      store.add(newRecord);
+      store.sync();
+
       console.log('On effectue le tirage au sort');
 
       var memberStore = Ext.StoreMgr.get('ot.stores.Member');
