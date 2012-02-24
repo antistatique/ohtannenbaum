@@ -17,28 +17,35 @@ ot.controllers.circles = new Ext.Controller({
     },
 
     show: function(options) {
+        var options = options || {};
         var store = Ext.getStore('ot.stores.Circle'),
             detailView = ot.views.circleDetail,
+            drawSummaryView = ot.views.circleDrawSummary,
             id = parseInt(options.id) || ot.currentCircleId,
             circle = store.getById(id);
         if (circle) {
             ot.currentCircleId = id;
-
             var memberStore = Ext.StoreMgr.get('ot.stores.Member');
             memberStore.clearFilter();
-
             memberStore.filter({
               property: 'ot.models.circle_id',
               value: id,
               exactMatch: true
             });
 
-            detailView.updateWithRecord(circle);
-
-            ot.views.viewport.setActiveItem(
+            if(store.getById(id).get('drawDate') != null){
+              drawSummaryView.updateWithRecord(circle);
+              ot.views.viewport.setActiveItem(
+                drawSummaryView,
+                options.animation
+              );
+            }else{
+              detailView.updateWithRecord(circle);
+              ot.views.viewport.setActiveItem(
                 detailView,
                 options.animation
-            );
+              );
+            }
         }
     },
     
@@ -151,5 +158,7 @@ ot.controllers.circles = new Ext.Controller({
       circleRecord.set('drawDate', new Date());
       circleRecord.dirty = true;
       circleStore.sync();
+
+      this.show();
     }
 });
