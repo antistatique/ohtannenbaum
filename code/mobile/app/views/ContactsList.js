@@ -1,7 +1,20 @@
 ot.views.ContactsList = Ext.extend(Ext.Panel, {
     dockedItems: [{
-        xtype: 'toolbar',
-        title: 'Contacts'
+      xtype: 'toolbar',
+      title: 'Contacts',
+      items: [{
+        text: 'Retour',
+        ui: 'back',
+        listeners: {
+          tap: function () {
+            Ext.dispatch({
+              controller: ot.controllers.circles,
+              action: 'show',
+              animation: { type:'slide', direction:'left' }
+            });
+          }
+        }
+      }],
     }],
     layout: 'fit',
     items: [{
