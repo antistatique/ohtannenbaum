@@ -4,8 +4,6 @@ require_once(dirname(__FILE__).'/lib/Swift/lib/swift_required.php');
 $jsonPost = $_GET['json'];
 $result = json_decode($jsonPost);
 
-error_log(print_r($result, true), 3 , dirname(__FILE__).'/output.log');
-
 $members = $result->members;
 $owner = $result->owner;
 $circle = $result->circle;
