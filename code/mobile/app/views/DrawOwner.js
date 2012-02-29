@@ -85,7 +85,7 @@ ot.views.DrawOwner = Ext.extend(Ext.Panel, {
       tpl: new Ext.XTemplate('Veuillez entrer vos informations d\'organisateur')
     });
 
-    this.items = [textPanel, this.form];
+    this.items = [{html: 'Entrez vos informations organisateur.'}, textPanel, this.form];
 
     ot.views.DrawOwner.superclass.initComponent.apply(this, arguments);
   },
