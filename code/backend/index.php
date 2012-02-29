@@ -14,6 +14,7 @@ foreach($members as $member){
   $sortedMembers[$member->id] = $member;
 }
 
+
 $transport = Swift_SmtpTransport::newInstance('smtp.gmail.com', 465, "ssl")
   ->setUsername('account@gmail.com')
   ->setPassword('password');
@@ -21,23 +22,28 @@ $transport = Swift_SmtpTransport::newInstance('smtp.gmail.com', 465, "ssl")
 $mailer = Swift_Mailer::newInstance($transport);
 
 foreach($members as $member){
-  $message = Swift_Message::newInstance('Oh Tannenbaum - tirage au sort : "'.$circle->title.'"')
-    ->setFrom(array('account@gmail.com' => 'OhTannenbaum'))
-    ->setTo(array($member->email => $member->name))
-    ->setBody("
-    Bonjour $member->name !
+  //Send email
+  if($member->email){
+    $message = Swift_Message::newInstance('Oh Tannenbaum - tirage au sort : "'.$circle->title.'"')
+      ->setFrom(array('account@gmail.com' => 'OhTannenbaum'))
+      ->setTo(array($member->email => $member->name))
+      ->setBody("
+      Bonjour $member->name !
 
-    $owner->name s'est occupé d'effectuer le tirage au sort pour: $circle->title.
+      $owner->name s'est occupé d'effectuer le tirage au sort pour: $circle->title.
 
-    Ton cadeau sera pour : ".$sortedMembers[$member->angelOf]->name."
+      Ton cadeau sera pour : ".$sortedMembers[$member->angelOf]->name."
 
-    En cas de question, n'hésite pas à me contacter :
-    $owner->name
-    $owner->phone
-    $owner->email
-    ");
+      En cas de question, n'hésite pas à me contacter :
+      $owner->name
+      $owner->phone
+      $owner->email
+      ");
 
-  $numSent = $mailer->send($message);
+    $numSent = $mailer->send($message);
+    }else{
+      //Send SMS
+    }
 }
 
 print json_encode(array('result' => 'success'));
