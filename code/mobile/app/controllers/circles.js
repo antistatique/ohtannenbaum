@@ -107,8 +107,6 @@ ot.controllers.circles = new Ext.Controller({
       store.add(newRecord);
       store.sync();
 
-      console.log('On effectue le tirage au sort');
-
       var memberStore = Ext.StoreMgr.get('ot.stores.Member');
       memberStore.clearFilter();
 
@@ -123,6 +121,12 @@ ot.controllers.circles = new Ext.Controller({
       membersArray.sort(function(){return Math.round(Math.random())-0.5});
 
       memberStore.clearFilter();
+
+      var jsonData = {
+        members: new Array(),
+        circle: Ext.StoreMgr.get('ot.stores.Circle').getById(ot.currentCircleId).data,
+        owner: Ext.StoreMgr.get('ot.stores.Owner').getAt(0).data 
+      };
 
       for(var i = 0; i < membersArray.length; i++){
         //Récupération de l'angel
@@ -149,8 +153,9 @@ ot.controllers.circles = new Ext.Controller({
         angelRecord.dirty = luckyRecord.dirty = true;
 
         memberStore.sync();
-      }
 
+        jsonData.members[i] = membersArray[i].data; 
+      }
 
       var circleStore = Ext.StoreMgr.get('ot.stores.Circle');
       var circleIndex = circleStore.find('id', ot.currentCircleId);
@@ -158,6 +163,18 @@ ot.controllers.circles = new Ext.Controller({
       circleRecord.set('drawDate', new Date());
       circleRecord.dirty = true;
       circleStore.sync();
+
+      Ext.Ajax.request({
+        url: 'http://192.168.0.11/antistatique/projets/ohtannenbaum/code/backend',
+        method: 'GET',
+        params: {json: JSON.stringify(jsonData)},
+        failure : function(response){
+            alert('failure')
+        },
+        success: function(response, opts) {                
+            alert('success')
+        }
+      });
 
       this.show();
     }
