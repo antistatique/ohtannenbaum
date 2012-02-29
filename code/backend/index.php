@@ -21,14 +21,20 @@ $transport = Swift_SmtpTransport::newInstance('smtp.gmail.com', 465, "ssl")
 $mailer = Swift_Mailer::newInstance($transport);
 
 foreach($members as $member){
-  $message = Swift_Message::newInstance('Tirage au sort pour "'.$circle->title.'"')
+  $message = Swift_Message::newInstance('Oh Tannenbaum - tirage au sort : "'.$circle->title.'"')
     ->setFrom(array('account@gmail.com' => 'OhTannenbaum'))
     ->setTo(array($member->email => $member->name))
     ->setBody("
-      Bonjour $member->name,
+    Bonjour $member->name !
 
-      $owner->name s'est chargé d'effectuer le tirage au sort pour \"$circle->title\".
-      Vous êtes donc chargé d'offrir un cadeau à ".$sortedMembers[$member->angelOf]->name."
+    $owner->name s'est occupé d'effectuer le tirage au sort pour: $circle->title.
+
+    Ton cadeau sera pour : ".$sortedMembers[$member->angelOf]->name."
+
+    En cas de question, n'hésite pas à me contacter :
+    $owner->name
+    $owner->phone
+    $owner->email
     ");
 
   $numSent = $mailer->send($message);
