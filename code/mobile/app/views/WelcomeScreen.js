@@ -1,11 +1,12 @@
 ot.views.WelcomeScreen = Ext.extend(Ext.Panel, {
-  styleHtmlContent: true,
+  fullscreen: true,
   scroll: 'vertical',
-  form: null,
+  layout: {
+    type: "vbox"
+  },
   initComponent: function() {
     var addButton, titlebar, welcomeText, formPanel, AddCircleBigButton;
 
-    //*Toolbar*//
     addButton = {
       itemId: 'addCircleButton',
       iconCls: 'add',
@@ -22,37 +23,24 @@ ot.views.WelcomeScreen = Ext.extend(Ext.Panel, {
       items: [{xtype: 'spacer'}, addButton]      
     };
 
-    /** Text panel **/
-    welcomeText = '<div class="welcomeScreen"><img src="ressources/images/sapin.jpg"/><br />Bienvenue sur l\'application<br />Oh Tannenbaum.<br />Créez simplement vos groupes<br />pour le tirage au sort.</div>';
-    var textPanel = new Ext.Panel({
-      title: 'My Text panel',
-      html: welcomeText,
-      style: {
-        "text-align": "center"
-      }
-    });
-
-
-    /** FormPanel **/
-    AddCircleBigButton = new Ext.Button({
-      applyTo:'button-div',
+    var bigButton =  new Ext.Button({
+      applyTo:'circleCreateButton',
       text: 'Créer mon premier cercle',
       handler:this.onAddAction,
       scope: this
     });
 
-    formPanel = new Ext.form.FormPanel({applyTo:Ext.getBody(),
-      xtype : 'panel',
-      title : 'Child Panel 1',
-      frame : true,
-      items : [AddCircleBigButton]
+    var firstPanel = new Ext.Panel({
+      html: 'Bienvenue sur l\'application<br />Oh Tannenbaum.<br />Créez simplement vos groupes<br />pour le tirage au sort.',
+      style: "width:100%; background:url('ressources/images/sapin.jpg') no-repeat center 10px; padding-top:220px; text-align:center; padding-bottom:50px;",
     });
 
-    Ext.apply(this, {
-      scroll: 'vertical',
-      dockedItems: [ titlebar, addButton ],
-      items: [ textPanel, formPanel ]
+    var secondPanel = new Ext.Panel({
+      items: [bigButton]
     });
+
+    this.items = [firstPanel, secondPanel];
+    this.dockedItems = [ titlebar ];
 
     ot.views.CircleCreate.superclass.initComponent.apply(this, arguments);
   },
