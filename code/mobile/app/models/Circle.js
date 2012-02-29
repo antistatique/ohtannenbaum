@@ -18,5 +18,12 @@ Ext.regStore('ot.stores.Circle', {
     proxy: {
         type: 'localstorage',
         id: 'ot-circles'
+    },
+    getGroupString: function (record) {
+        if (record && (record.data.drawDate != null)) {
+            return 'Déjà tirés au sort'
+        } else {
+            return 'En cours';
+        }
     }
 });

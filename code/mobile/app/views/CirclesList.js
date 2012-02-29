@@ -30,6 +30,7 @@ ot.views.CirclesList = Ext.extend(Ext.Panel, {
       xtype: 'list',
       store: Ext.getStore('ot.stores.Circle'),
       itemTpl: '{title}',
+      grouped: true,
       listeners: {
         itemtap: function (list, index, item, e) {
           var record = list.getStore().getAt(index);
