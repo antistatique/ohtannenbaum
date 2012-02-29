@@ -6,8 +6,6 @@ ot.views.CircleDetail = Ext.extend(Ext.Panel, {
   drawButton: null,
   initComponent: function() {
     var me = this;
-    console.log('Ok, my detail circle informations can be now displayed');
-
     var morebutton, titlebar, bottomDock, backButton, tirage, drawButton, drawPanel;
 
     this.actionSheet = new Ext.ActionSheet({
@@ -99,7 +97,8 @@ ot.views.CircleDetail = Ext.extend(Ext.Panel, {
     };
 
     var infoPanel = this.infoPanel = new Ext.Panel({
-      tpl: new Ext.XTemplate('{nbItems} membre(s) rattaché(s) au cercle courant')
+      tpl: new Ext.XTemplate('{infoText}'),
+      style: "text-align:center"
     });
 
     
@@ -123,10 +122,6 @@ ot.views.CircleDetail = Ext.extend(Ext.Panel, {
       frame : true,
       items : [this.drawButton]
     });
-    
-    infoPanel.update({
-      nbItems: 4
-    });
 
     this.drawButton.disable();
 
@@ -145,19 +140,19 @@ ot.views.CircleDetail = Ext.extend(Ext.Panel, {
     
     var toolbar = this.getDockedItems()[0];
     toolbar.setTitle(record.get('title'));
-    //toolbar.getComponent('edit').record = record;
 
     var memberListLength = Ext.StoreMgr.get('ot.stores.Member').getCount();
 
-    this.infoPanel.update({
-      nbItems: memberListLength
-    });
-
     if(memberListLength >= 3){
-      console.log('Plus ou egal à un membre');
+          
+      this.infoPanel.update({
+        infoText: 'Vous pouvez ajouter d\'autres participants ou faire le tirage au sort'
+      });
       this.drawButton.enable();
-      //this.items.drawButton.show();
     }else{
+      this.infoPanel.update({
+        infoText: 'Ajoutez encore ' + (3 - memberListLength) + ' membre(s) minimum pour faire le tirage au sort'
+      });
       this.drawButton.disable();
     }
   },
