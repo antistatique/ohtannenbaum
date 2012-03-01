@@ -28,7 +28,7 @@ ot.controllers.circles = new Ext.Controller({
             var memberStore = Ext.StoreMgr.get('ot.stores.Member');
             memberStore.clearFilter();
             memberStore.filter({
-              property: 'ot.models.circle_id',
+              property: 'circle_id',
               value: id,
               exactMatch: true
             });
