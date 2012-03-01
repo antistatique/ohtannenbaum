@@ -10,7 +10,7 @@ ot.views.CircleCreate = Ext.extend(Ext.Panel, {
       items: [{
         id: 'circleTitle',
         name: 'circleTitle',
-        label: 'Titre du cercle',
+        label: 'Titre',
         xtype: 'textfield' 
       }],
     });
