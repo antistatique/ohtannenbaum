@@ -1,3 +1,5 @@
 .DS_Store
 code/mobile/lib/touch
 code/mobile/lib/phonegap-1.2.0.js
+code/ios/ohtannenbaum.xcodeproj/project.xcworkspace/
+code/ios/ohtannenbaum.xcodeproj/xcuserdata/
