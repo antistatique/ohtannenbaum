@@ -40,23 +40,6 @@ Ext.data.ProxyMgr.registerType("contactstorage",
             );
         },
         update: function(operation, callback, scope) {
-            operation.setStarted();
-            //put model data back into deviceContact
-            var deviceContact = operation.records[0].deviceContact;
-            var contact = operation.records[0].data;
-            deviceContact.name.givenName = contact.givenName;
-            deviceContact.name.familyName = contact.familyName;
-            //save back via PhoneGap
-            var thisProxy = this;
-            deviceContact.save(function() {
-                //announce success
-                operation.setCompleted();
-                operation.setSuccessful();
-                //finish with callback
-                if (typeof callback == 'function') {
-                    callback.call(scope || thisProxy, operation);
-                }
-            });
         },
         destroy: function(operation, callback, scope) {
         }
