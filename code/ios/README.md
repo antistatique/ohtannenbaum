@@ -17,3 +17,22 @@ Pour compiler le projet il est nécessaire de posséder les éléments suivants�
     $ cd code/ios
     $ ln -s ../mobile ./www
 
+
+# Utilisation du service PhoneGap Build
+
+Pour simplifier la création des applications native, PhoneGap/Nitobi propose un service hosté nommé [PhoneGap:Build](https://build.phonegap.com).
+
+Comme décris sur [cette page](https://build.phonegap.com/docs/git-hosting), il est possible générer les builds en utilisant git.
+
+
+## Création d'une branche dédiée
+
+Pour cela, nous devons créer une branche contenant uniquement le dossier `code/mobile`. Il est possible d'effectuer cette opération en utilisant [git-subtree](https://github.com/apenwarr/git-subtree/):
+
+    git subtree split -P <folder> -b <target-branch> <origin-branch>
+
+
+Pour créer une branche nommée `deploy` contenant le dossier `code/mobile` basé sur la branche `master` il faut utilisé la commande suivante:
+
+    $ git subtree split -P code/mobile -b deploy master
+

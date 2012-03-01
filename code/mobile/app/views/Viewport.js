@@ -12,10 +12,9 @@ ot.views.Viewport = Ext.extend(Ext.Panel, {
             manuallyAddMember: new ot.views.ManuallyAddMember(),
             circleCreate: new ot.views.CircleCreate(),
             welcomeScreen: new ot.views.WelcomeScreen(),
-            contactsList: new ot.views.ContactsList()
-            
-            //contactDetail: new ot.views.ContactDetail(),
-            //contactForm: new ot.views.ContactForm()
+            contactsList: new ot.views.ContactsList(),
+            drawOwner: new ot.views.DrawOwner(),
+            circleDrawSummary: new ot.views.CircleDrawSummary()
         });
         
         //put instances of cards into viewport
@@ -32,7 +31,6 @@ ot.views.Viewport = Ext.extend(Ext.Panel, {
             ]
           });
         }
-        
         
         ot.views.Viewport.superclass.initComponent.apply(this, arguments);
     }
