@@ -1,6 +1,5 @@
 ot.controllers.circles = new Ext.Controller({
     index: function(options) {
-      console.log('start circle.index');
       options = options || {};
       if(Ext.getStore('ot.stores.Circle').getCount() > 0){
         ot.views.viewport.setActiveItem(
@@ -16,7 +15,6 @@ ot.controllers.circles = new Ext.Controller({
     },
 
     show: function(options) {
-        console.log('start circle.show');
         options = options || {};
         var store = Ext.getStore('ot.stores.Circle'),
             detailView = ot.views.circleDetail,
@@ -43,7 +41,6 @@ ot.controllers.circles = new Ext.Controller({
     },
     
     insert: function(options){
-        console.log('start circle.insert');
         options = options || {};
         if(Ext.getStore('ot.stores.Circle').findRecord('title',options.title, 0, false, true, true) !== null){
           ot.pushNotification('Un cercle portant le même nom existe déja');
@@ -66,7 +63,6 @@ ot.controllers.circles = new Ext.Controller({
     },
 
     add: function (options) {
-        console.log('start circle.add');
         options = options || {};
         var addView = ot.views.circleCreate;
 
@@ -87,7 +83,6 @@ ot.controllers.circles = new Ext.Controller({
     },
     doDraw: function(){
       options = options || {};
-      console.log('On effectue le tirage au sort');
 
       var memberStore = Ext.StoreMgr.get('ot.stores.Member');
       memberStore.clearFilter();
@@ -101,8 +96,6 @@ ot.controllers.circles = new Ext.Controller({
       var membersArray = memberStore.data.items;
 
       membersArray.sort(function(){return Math.round(Math.random())-0.5});
-
-      console.log(membersArray);
 
     }
 });
