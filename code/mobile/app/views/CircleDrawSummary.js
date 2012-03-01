@@ -44,7 +44,11 @@ ot.views.CircleDrawSummary = Ext.extend(Ext.Panel, {
       applyTo:'button-div',
       text: 'Ré-envoyer les messages',
       handler: function(){
-        console.log('Réenvoyer les messages')
+        Ext.dispatch({
+          controller: ot.controllers.circles,
+          action: 'resendNotifications',
+          animation: { type:'slide', direction:'right' }
+        });
       },
       scope: this
     });
@@ -72,9 +76,6 @@ ot.views.CircleDrawSummary = Ext.extend(Ext.Panel, {
     
     var toolbar = this.getDockedItems()[0];
     toolbar.setTitle(record.get('title'));
-    //toolbar.getComponent('edit').record = record;
-
-    console.log('Juste avant la mise a jour de la date via moment.js');
 
     var recordDate = record.get('drawDate');
 
