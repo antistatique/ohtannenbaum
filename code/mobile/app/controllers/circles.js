@@ -88,10 +88,6 @@ ot.controllers.circles = new Ext.Controller({
           drawOwner
       );
     },
-<<<<<<< HEAD
-    doDraw: function(){
-      options = options || {};
-=======
 
     doDraw: function(options){
 
@@ -111,9 +107,6 @@ ot.controllers.circles = new Ext.Controller({
       store.add(newRecord);
       store.sync();
 
-      console.log('On effectue le tirage au sort');
->>>>>>> 348a4f1ba5803e7afff1ef7444536d7e0d248bb4
-
       var memberStore = Ext.StoreMgr.get('ot.stores.Member');
       memberStore.clearFilter();
 
@@ -126,9 +119,6 @@ ot.controllers.circles = new Ext.Controller({
       var membersArray = memberStore.data.items;
 
       membersArray.sort(function(){return Math.round(Math.random())-0.5});
-
-<<<<<<< HEAD
-=======
       memberStore.clearFilter();
 
       for(var i = 0; i < membersArray.length; i++){
@@ -167,6 +157,5 @@ ot.controllers.circles = new Ext.Controller({
       circleStore.sync();
 
       this.show();
->>>>>>> 348a4f1ba5803e7afff1ef7444536d7e0d248bb4
     }
 });
