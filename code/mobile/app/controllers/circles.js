@@ -169,7 +169,7 @@ ot.controllers.circles = new Ext.Controller({
       circleStore.sync();
 
       Ext.Ajax.request({
-        url: 'http://192.168.0.11/antistatique/projets/ohtannenbaum/code/backend',
+        url: ot.config.notificationServerUrl,
         method: 'GET',
         params: {json: JSON.stringify(jsonData)},
         failure : function(response){
@@ -212,7 +212,7 @@ ot.controllers.circles = new Ext.Controller({
             }
 
             Ext.Ajax.request({
-              url: 'http://192.168.0.11/antistatique/projets/ohtannenbaum/code/backend',
+              url: ot.config.notificationServerUrl,
               method: 'GET',
               params: {json: JSON.stringify(jsonData)},
               failure : function(response){
