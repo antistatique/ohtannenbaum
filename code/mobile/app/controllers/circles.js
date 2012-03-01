@@ -122,10 +122,14 @@ ot.controllers.circles = new Ext.Controller({
 
       memberStore.clearFilter();
 
+      var owner = Ext.StoreMgr.get('ot.stores.Owner');
+      owner.clearFilter();
+      owner.filter('circle_id', ot.currentCircleId);
+      owner = owner.getAt(0).data;
       var jsonData = {
         members: new Array(),
         circle: Ext.StoreMgr.get('ot.stores.Circle').getById(ot.currentCircleId).data,
-        owner: Ext.StoreMgr.get('ot.stores.Owner').getAt(0).data 
+        owner: owner
       };
 
       for(var i = 0; i < membersArray.length; i++){
@@ -172,7 +176,7 @@ ot.controllers.circles = new Ext.Controller({
             alert('failure')
         },
         success: function(response, opts) {                
-            alert('success')
+            navigator.notification.alert('Un message à été envoyé aux participants leur indiquant à qui ils devonr offrir leurs cadeaux.', function(){}, 'Bravo', 'Super!');
         }
       });
 
