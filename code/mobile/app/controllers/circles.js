@@ -3,13 +3,11 @@ ot.controllers.circles = new Ext.Controller({
       options = options || {};
       if(Ext.getStore('ot.stores.Circle').getCount() > 0){
         ot.views.viewport.setActiveItem(
-          ot.views.circlesList,
-          options.animation
+          ot.views.circlesList
         );
       }else{
         ot.views.viewport.setActiveItem(
-          ot.views.welcomeScreen,
-          options.animation
+          ot.views.welcomeScreen
         );
       }
       
@@ -17,7 +15,7 @@ ot.controllers.circles = new Ext.Controller({
     },
 
     show: function(options) {
-        var options = options || {};
+        options = options || {};
         var store = Ext.getStore('ot.stores.Circle'),
             detailView = ot.views.circleDetail,
             drawSummaryView = ot.views.circleDrawSummary,
@@ -50,7 +48,7 @@ ot.controllers.circles = new Ext.Controller({
     },
     
     insert: function(options){
-        
+        options = options || {};
         if(Ext.getStore('ot.stores.Circle').findRecord('title',options.title, 0, false, true, true) !== null){
           ot.pushNotification('Un cercle portant le même nom existe déja');
           return false;
@@ -72,23 +70,25 @@ ot.controllers.circles = new Ext.Controller({
     },
 
     add: function (options) {
+        options = options || {};
         var addView = ot.views.circleCreate;
 
         addView.reset();
 
         ot.views.viewport.setActiveItem(
-            addView,
-            options.animation
+            addView
         );
     },
     
     drawOwnerEdit: function(options){
+      options = options || {};
+      
       var drawOwner = ot.views.drawOwner;
       ot.views.viewport.setActiveItem(
-          drawOwner,
-          options.animation
+          drawOwner
       );
     },
+
     doDraw: function(options){
 
       options = options || {}
@@ -119,7 +119,6 @@ ot.controllers.circles = new Ext.Controller({
       var membersArray = memberStore.data.items;
 
       membersArray.sort(function(){return Math.round(Math.random())-0.5});
-
       memberStore.clearFilter();
 
       var owner = Ext.StoreMgr.get('ot.stores.Owner');
