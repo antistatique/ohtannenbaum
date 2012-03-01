@@ -4,27 +4,38 @@
         <meta charset="utf-8">
         
         <title>Oh tannenbaum</title>
-        <script type="text/javascript" src="lib/touch/sencha-touch.js"></script>
+        <!-- <script type="text/javascript" src="http://192.168.1.53:8080/target/target-script-min.js#phonegap"></script> -->
+        <script type="text/javascript" src="lib/phonegap-1.4.1.js"></script>
+        <script type="text/javascript" src="lib/touch/sencha-touch-debug.js"></script>
+
         <link href="lib/touch/resources/css/sencha-touch.css" rel="stylesheet" type="text/css" />
         
         <!-- If you application is targeting iOS BEFORE 4.0 you MUST put json2.js from http://www.JSON.org/json2.js into your www directory and include it here -->
-        <script type="text/javascript" src="lib/phonegap-1.2.0.js"></script>
+        <script type="text/javascript" src="app/routes.js"></script>
         <script type="text/javascript" src="app/app.js"></script>
-        <script type="text/javascript" src="app/controllers/circles.js"></script>
+        <script type="text/javascript" src="app/config.js"></script>
         <script type="text/javascript" src="app/models/Circle.js"></script>
+        <script type="text/javascript" src="app/models/Member.js"></script>
+        <script type="text/javascript" src="app/models/contacts.js"></script>
+        <script type="text/javascript" src="app/models/owners.js"></script>
+        <script type="text/javascript" src="app/controllers/circles.js"></script>
+        <script type="text/javascript" src="app/controllers/contacts.js"></script>
+        <script type="text/javascript" src="app/controllers/members.js"></script>
         <script type="text/javascript" src="app/views/Viewport.js"></script>
+        <script type="text/javascript" src="app/views/WelcomeScreen.js"></script>
         <script type="text/javascript" src="app/views/CirclesList.js"></script>
+        <script type="text/javascript" src="app/views/CircleDrawSummary.js"></script>
         <script type="text/javascript" src="app/views/CircleDetail.js"></script>
+        <script type="text/javascript" src="app/views/CircleCreate.js"></script>
+        <script type="text/javascript" src="app/views/ContactsList.js"></script>
+        <script type="text/javascript" src="app/views/ManuallyAddMember.js"></script>
+        <script type="text/javascript" src="app/views/DrawOwner.js"></script>
         
         <script type="text/javascript">
             document.addEventListener("deviceready", function (e) {
-	            alert('Device and PhoneGap is ready');
 	            ot.mainLaunch(e);
 	        }, false);
         </script>
-        
-        <!-- Need a javascript debugger ? Download Weinre http://phonegap.github.com/weinre/ and comment out the following line: -->
-        <!-- <script type="text/javascript" src="http://localhost:8080/target/target-script-min.js#anonymous"></script> -->
     </head>
     <body>
         
