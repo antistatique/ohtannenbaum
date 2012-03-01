@@ -1,11 +1,14 @@
 ot.views.CirclesList = Ext.extend(Ext.Panel, {
-  styleHtmlContent: true,
   scroll: 'vertical',
-  form: null,
-
+  // layout: {
+  //   type: "vbox",
+  //   align: "stretch"
+  // },
+  layout: 'fit',
+  totiti: null,
   initComponent: function() {
     var that = this;
-    this.dockedItems = [{
+    var dockedItems = [{
       xtype: 'toolbar',
       title: 'Oh Tannenbaum',
       record: null,
@@ -26,23 +29,28 @@ ot.views.CirclesList = Ext.extend(Ext.Panel, {
       ]
     }];
 
-    this.items = [{
-      xtype: 'list',
-      store: Ext.getStore('ot.stores.Circle'),
-      itemTpl: '{title}',
-      grouped: true,
-      listeners: {
-        itemtap: function (list, index, item, e) {
-          var record = list.getStore().getAt(index);
-          
-          Ext.dispatch({
-            controller: ot.controllers.circles,
-            action: 'show',
-            id: record.getId()
-          });
+
+    Ext.apply(this, {
+      dockedItems: dockedItems,
+      items: [{
+        flex: 1,
+        xtype: 'list',
+        store: Ext.getStore('ot.stores.Circle'),
+        itemTpl: '{title}',
+        grouped: true,
+        listeners: {
+          itemtap: function (list, index, item, e) {
+            var record = list.getStore().getAt(index);
+            Ext.dispatch({
+              controller: ot.controllers.circles,
+              action: 'show',
+              id: record.getId()
+            });
+          }
         }
-      }
-    }];
-    ot.views.CircleCreate.superclass.initComponent.apply(this, arguments);
+      }]
+    });
+
+    ot.views.CirclesList.superclass.initComponent.apply(this, arguments);
   },
 });
