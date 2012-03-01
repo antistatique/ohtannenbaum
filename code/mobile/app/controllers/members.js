@@ -41,10 +41,9 @@ ot.controllers.members = new Ext.Controller({
       phone = emailorphone;
     }
 
-    console.log(options);
     var circle_id = ot.currentCircleId;
     var circleModel = Ext.ModelMgr.create({id: circle_id}, 'ot.models.Circle');
-    var myUser = new ot.models.Member({name: options.name, email: email, phone: phone});
+    var myUser = new ot.models.Member({name: options.name, email: email, phone: phone, circle_id: ot.currentCircleId });
     circleModel.Members().add(myUser);
 
     var store = Ext.getStore('ot.stores.Member');

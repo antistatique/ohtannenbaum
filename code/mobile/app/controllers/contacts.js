@@ -1,9 +1,5 @@
 ot.controllers.contacts = new Ext.Controller({
   index: function(options) {
-
-    console.log('Call contactsList view from contacts controller');
-    console.log(ot.currentCircleId);
-
     options = options || {};
     ot.views.viewport.setActiveItem(
       ot.views.contactsList,
@@ -15,22 +11,15 @@ ot.controllers.contacts = new Ext.Controller({
     //Récupération du circle id
     var circle_id = ot.currentCircleId;
     var emailAddress = '';
-    if(options.record.data.emails){
-      emailAddress = options.record.data.emails[0].value;
-    }
     var phoneNumber = '';
-    if(options.record.data.phoneNumbers){
+    if(options.record.data.emails && options.selected == 'email'){
+      emailAddress = options.record.data.emails[0].value;
+    }else{
       phoneNumber = options.record.data.phoneNumbers[0].value;
     }
 
-    if(options.selected == 'email'){
-      phoneNumber = '';
-    }else{
-      emailAddress = '';
-    }
-
     var circleModel = Ext.ModelMgr.create({id: circle_id}, 'ot.models.Circle');
-    var myUser = new ot.models.Member({name: options.record.data.givenName + ' ' + options.record.data.familyName, email: emailAddress, phone: phoneNumber});
+    var myUser = new ot.models.Member({name: options.record.data.givenName + ' ' + options.record.data.familyName, email: emailAddress, phone: phoneNumber, circle_id: ot.currentCircleId });
     circleModel.Members().add(myUser);
 
     var store = Ext.getStore('ot.stores.Member');
@@ -44,11 +33,10 @@ ot.controllers.contacts = new Ext.Controller({
         circle = store.getById(circle_id);
 
     if (circle) {
-      
       detailView.updateWithRecord(circle);
       ot.views.viewport.setActiveItem(
-          detailView,
-          options.animation
+        detailView,
+        options.animation
       );
     }
   }
