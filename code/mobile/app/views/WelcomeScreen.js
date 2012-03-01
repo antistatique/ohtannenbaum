@@ -1,6 +1,7 @@
 ot.views.WelcomeScreen = Ext.extend(Ext.Panel, {
   fullscreen: true,
   scroll: 'vertical',
+  style: "background-color:#024259",
   layout: {
     type: "vbox"
   },
@@ -31,12 +32,14 @@ ot.views.WelcomeScreen = Ext.extend(Ext.Panel, {
     });
 
     var firstPanel = new Ext.Panel({
-      html: 'Bienvenue sur l\'application<br />Oh Tannenbaum.<br />Créez simplement vos groupes<br />pour le tirage au sort.',
-      style: "width:100%; background:url('ressources/images/sapin.jpg') no-repeat center 10px; padding-top:220px; text-align:center; padding-bottom:50px;",
+      style: "width:100%; background:url('ressources/images/homepage.png') no-repeat center top; background-size:cover",
+      flex:1
     });
 
     var secondPanel = new Ext.Panel({
-      items: [bigButton]
+      items: [bigButton],
+      flex:0.2,
+      style: "padding-top:25px"
     });
 
     this.items = [firstPanel, secondPanel];
