@@ -111,7 +111,7 @@ ot.controllers.circles = new Ext.Controller({
       memberStore.clearFilter();
 
       memberStore.filter({
-        property: 'ot.models.circle_id',
+        property: 'circle_id',
         value: ot.currentCircleId,
         exactMatch: true
       });
@@ -181,5 +181,49 @@ ot.controllers.circles = new Ext.Controller({
       });
 
       this.show();
+    },
+    resendNotifications: function(){
+      Ext.Msg.confirm('Renvoi des notifiations', 'Vous êtes sur le point de renvoyer les notifications aux membres du cercle. Cette action est irréversible. Voulez-vous continuer?', 
+        function(btn){
+          if(btn == 'yes'){
+            var memberStore = Ext.StoreMgr.get('ot.stores.Member');
+            memberStore.clearFilter();
+
+            memberStore.filter({
+              property: 'circle_id',
+              value: ot.currentCircleId,
+              exactMatch: true
+            });
+
+            var membersArray = memberStore.data.items;
+
+            var owner = Ext.StoreMgr.get('ot.stores.Owner');
+            owner.clearFilter();
+            owner.filter('circle_id', ot.currentCircleId);
+            owner = owner.getAt(0).data;
+            var jsonData = {
+              members: new Array(),
+              circle: Ext.StoreMgr.get('ot.stores.Circle').getById(ot.currentCircleId).data,
+              owner: owner
+            };
+
+            for(var i = 0; i < membersArray.length; i++){
+              jsonData.members[i] = membersArray[i].data; 
+            }
+
+            Ext.Ajax.request({
+              url: 'http://192.168.0.11/antistatique/projets/ohtannenbaum/code/backend',
+              method: 'GET',
+              params: {json: JSON.stringify(jsonData)},
+              failure : function(response){
+                  alert('failure')
+              },
+              success: function(response, opts) {                
+                  navigator.notification.alert('Un message à été envoyé aux participants leur indiquant à qui ils devonr offrir leurs cadeaux.', function(){}, 'Bravo', 'Super!');
+              }
+            });
+          }
+        }
+      );
     }
 });
