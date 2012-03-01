@@ -4,8 +4,9 @@ ot.models.Member = Ext.regModel('ot.models.Member', {
         { name: 'name', type: 'string' },
         { name: 'email', type: 'string' },
         { name: 'phone', type: 'string' },
-        { name: 'angelOf', type: 'id' },
-        { name: 'luckyOf', type: 'id' }
+        { name: 'angelOf', type: 'int' },
+        { name: 'luckyOf', type: 'int' },
+        { name: 'circle_id', type: 'int' }
     ],
     Associations: [
         {type: 'belongsTo', model: 'ot.models.Circle'}
