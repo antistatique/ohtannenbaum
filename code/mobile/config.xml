@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns="http://www.w3.org/ns/widgets"
+    xmlns:gap="http://phonegap.com/ns/1.0"
+    id="net.antistatique.ohtannenbaum"
+    version="1.3.1">
+
+    <name>Oh Tannenbaum</name>
+    <description>
+        Secret Santa Manager App.
+    </description>
+
+    <author href="http://www.antistatique.net" email="mathieu@antistatique.net">
+        Mathieu Latin
+    </author>
+    <icon src="icons/icon.png" width="57" height="57" gap:role="default" />
+
+    <icon src="icons/icon.png" width="57" height="57" gap:role="default" />
+    <icon src="icons/icon@2x.png" width="114" height="114" gap:role="default" />
+
+    <gap:splash src="splashes/splash.png"/>
+    <gap:splash src="splashes/splash@2x.png" width="640" height="960"/>
+
+<!--
+    <feature name="http://api.phonegap.com/1.0/geolocation"/>
+    <feature name="http://api.phonegap.com/1.0/network"/>
+-->
+
+    <preference name="orientation" value="portrait" />
+    <preference name="target-device" value="handset" />
+</widget>
